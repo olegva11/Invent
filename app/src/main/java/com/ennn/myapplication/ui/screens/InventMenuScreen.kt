@@ -40,7 +40,7 @@ fun InventMenuScreen(innerPadding: PaddingValues, navController: NavHostControll
 
 @Composable
 fun ItemButton(itemText: String, itemCount: Int, onClick: () -> Unit) {
-    Card(modifier = Modifier.padding(bottom = 10.dp).clickable { onClick() }) {
+    Card(modifier = Modifier.padding(5.dp).clickable { onClick() }) {
         Row(modifier = Modifier.padding(10.dp)) {
             Text(modifier = Modifier.weight(2f), text = itemText)
             Text(

@@ -2,12 +2,11 @@ package com.ennn.myapplication
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavHostController
 import com.ennn.myapplication.navigation.Navigation
 
 @Composable
-fun InventApp(modifier: PaddingValues)
+fun InventApp(navController: NavHostController, modifier: PaddingValues)
 {
-    val navController = rememberNavController()
     Navigation(navController, modifier)
 }
