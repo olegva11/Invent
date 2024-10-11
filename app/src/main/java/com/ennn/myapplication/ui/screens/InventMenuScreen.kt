@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.ennn.myapplication.navigation.ScreenRoute
 
 
@@ -51,4 +53,13 @@ fun ItemButton(itemText: String, itemCount: Int, onClick: () -> Unit) {
             )
         }
     }
+}
+
+@Composable
+@Preview(showSystemUi = true, showBackground = true)
+fun InventMenuScreenPreview() {
+    val navController = rememberNavController()  // Створюємо NavController для прев'ю
+    val paddingValues = PaddingValues(16.dp)      // Задаємо стандартний PaddingValues для прев'ю
+
+    InventMenuScreen(innerPadding = paddingValues, navController = navController)
 }

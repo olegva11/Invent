@@ -1,6 +1,7 @@
 package com.ennn.myapplication.ui.screens
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,6 +33,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -44,26 +47,30 @@ import com.ennn.myapplication.navigation.ScreenRoute
 fun LoginScreen(innerPadding: PaddingValues, navController: NavHostController) {
     var password by remember { mutableStateOf("") }
 
-    Column(
-        modifier = Modifier
-            .padding(innerPadding)
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        DropDownUsersList()
-        Spacer(modifier = Modifier.height(16.dp))
-        PasswordTextField(
-            password = password,
-            onPasswordChange = { newPassword -> password = newPassword }
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = {
-            navController.navigate(ScreenRoute.InventMenuScreen.route)
-        }) {
-            Text(stringResource(R.string.login_button))
+    Box( modifier = Modifier
+        .padding(innerPadding).fillMaxSize()){
+        Column(
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            DropDownUsersList()
+            Spacer(modifier = Modifier.height(16.dp))
+            PasswordTextField(
+                password = password,
+                onPasswordChange = { newPassword -> password = newPassword }
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = {
+                navController.navigate(ScreenRoute.InventMenuScreen.route)
+            }) {
+                Text(stringResource(R.string.login_button))
+            }
         }
     }
+
 }
 
 @Composable
@@ -78,7 +85,8 @@ fun DropDownUsersList()
 
     Box(
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth().border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(20.dp))
+            .clip(RoundedCornerShape(20.dp))
     ) {
         Card(modifier = Modifier
             .fillMaxWidth()
@@ -127,6 +135,7 @@ fun PasswordTextField(password: String, onPasswordChange: (String) -> Unit) {
                 Icon(imageVector = image, contentDescription = if (passwordVisible) "Приховати пароль" else "Показати пароль")
             }
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().border(width = 1.dp, color = Color.White, shape = RoundedCornerShape(20.dp))
+            .clip(RoundedCornerShape(20.dp))
     )
 }
