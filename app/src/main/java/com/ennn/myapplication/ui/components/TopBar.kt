@@ -12,16 +12,18 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.ennn.myapplication.navigation.ScreenRoute
+import com.ennn.myapplication.ui.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DynamicTopAppBar(navController: NavHostController) {
+fun DynamicTopAppBar(navController: NavHostController, viewModel: SharedViewModel) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -53,12 +55,17 @@ fun DynamicTopAppBar(navController: NavHostController) {
                 "InventMenuScreen" -> {}
                 "InventDetailedScreen" -> {}
                 "SettingScreen" -> {
-                    IconButton(onClick = { navController.navigate(ScreenRoute.SettingScreen.route) }) {
-                        Icon(
-                            imageVector = Icons.Filled.Done,
-                            tint = Color.White,
-                            contentDescription = "Localized description"
-                        )
+                    if (!viewModel.isErrorSetting.collectAsState().value) {
+                        IconButton(onClick = {
+                            viewModel.saveConnectSettings()
+                            navController.popBackStack()
+                        }) {
+                            Icon(
+                                imageVector = Icons.Filled.Done,
+                                tint = Color.White,
+                                contentDescription = "Localized description"
+                            )
+                        }
                     }
                 }
 

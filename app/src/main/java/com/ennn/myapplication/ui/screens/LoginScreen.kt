@@ -42,9 +42,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.ennn.myapplication.R
 import com.ennn.myapplication.navigation.ScreenRoute
+import com.ennn.myapplication.ui.SharedViewModel
 
 @Composable
-fun LoginScreen(innerPadding: PaddingValues, navController: NavHostController) {
+fun LoginScreen(innerPadding: PaddingValues, viewModel: SharedViewModel, navController: NavHostController) {
     var password by remember { mutableStateOf("") }
 
     Box( modifier = Modifier
@@ -56,7 +57,7 @@ fun LoginScreen(innerPadding: PaddingValues, navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            DropDownUsersList()
+            DropDownUsersList(viewModel)
             Spacer(modifier = Modifier.height(16.dp))
             PasswordTextField(
                 password = password,
@@ -74,7 +75,7 @@ fun LoginScreen(innerPadding: PaddingValues, navController: NavHostController) {
 }
 
 @Composable
-fun DropDownUsersList()
+fun DropDownUsersList(viewModel: SharedViewModel)
 {
     val options = listOf("Користувач 1", "Користувач 2", "Користувач 3")
     var userName by remember { mutableStateOf("") }
