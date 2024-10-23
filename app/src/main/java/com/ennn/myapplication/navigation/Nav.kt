@@ -9,12 +9,14 @@ import com.ennn.myapplication.ui.SharedViewModel
 import com.ennn.myapplication.ui.screens.InventDetailedScreen
 import com.ennn.myapplication.ui.screens.InventMenuScreen
 import com.ennn.myapplication.ui.screens.LoginScreen
-import com.ennn.myapplication.ui.screens.SettingScreen
+import com.ennn.myapplication.ui.screens.settings.SettingScreen
+import com.ennn.myapplication.ui.screens.settings.SettingViewModel
 
 @Composable
 fun Navigation(
     navController: NavHostController,
     viewModel: SharedViewModel,
+    settingViewModel: SettingViewModel,
     innerPadding: PaddingValues
 ) {
     NavHost(
@@ -41,7 +43,7 @@ fun Navigation(
         composable(
             ScreenRoute.SettingScreen.route
         ) {
-            SettingScreen(innerPadding, viewModel)
+            SettingScreen(innerPadding, settingViewModel)
         }
     }
 }

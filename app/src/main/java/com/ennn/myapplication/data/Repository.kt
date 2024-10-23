@@ -39,6 +39,10 @@ class Repository @Inject constructor(
         dataStore.edit { preferences ->
             preferences[PrefKeys.IP_ADDRESS] = stateApplication.ipAddress
             preferences[PrefKeys.PORT_ADDRESS] = stateApplication.portAddress
+            preferences[PrefKeys.NAME_DATABASE] = stateApplication.nameDatabase
+            preferences[PrefKeys.LOGIN_DATABASE] = stateApplication.loginDatabase
+            preferences[PrefKeys.PASSWORD_DATABASE] = stateApplication.passwordDatabase
+            preferences[PrefKeys.SERVER_KEY_DATABASE] = stateApplication.serverKeyDatabase
         }
     }
 }

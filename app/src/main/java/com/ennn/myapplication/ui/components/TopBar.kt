@@ -20,10 +20,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.ennn.myapplication.navigation.ScreenRoute
 import com.ennn.myapplication.ui.SharedViewModel
+import com.ennn.myapplication.ui.screens.settings.SettingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DynamicTopAppBar(navController: NavHostController, viewModel: SharedViewModel) {
+fun DynamicTopAppBar(
+    navController: NavHostController,
+    viewModel: SharedViewModel,
+    settingViewModel: SettingViewModel
+) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
@@ -55,9 +60,9 @@ fun DynamicTopAppBar(navController: NavHostController, viewModel: SharedViewMode
                 "InventMenuScreen" -> {}
                 "InventDetailedScreen" -> {}
                 "SettingScreen" -> {
-                    if (!viewModel.isErrorSetting.collectAsState().value) {
+                    if (!settingViewModel.isErrorSetting.collectAsState().value) {
                         IconButton(onClick = {
-                            viewModel.saveConnectSettings()
+                            settingViewModel.saveConnectSettings()
                             navController.popBackStack()
                         }) {
                             Icon(

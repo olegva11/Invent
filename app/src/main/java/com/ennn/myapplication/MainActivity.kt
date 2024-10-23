@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ennn.myapplication.navigation.Navigation
 import com.ennn.myapplication.ui.SharedViewModel
 import com.ennn.myapplication.ui.components.DynamicTopAppBar
+import com.ennn.myapplication.ui.screens.settings.SettingViewModel
 import com.ennn.myapplication.ui.theme.InventTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,15 +23,16 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            val viewModel: SharedViewModel = hiltViewModel()
+            val sharedViewModel: SharedViewModel = hiltViewModel()
+            val settingViewModel: SettingViewModel = hiltViewModel()
 
             val navController = rememberNavController()
             InventTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(),
                     topBar = {
-                        DynamicTopAppBar(navController, viewModel)
+                        DynamicTopAppBar(navController, sharedViewModel, settingViewModel)
                     }) { innerPadding ->
-                    Navigation(navController, viewModel, innerPadding)
+                    Navigation(navController, sharedViewModel, settingViewModel, innerPadding)
                 }
             }
         }
