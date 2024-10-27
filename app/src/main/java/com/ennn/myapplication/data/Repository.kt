@@ -6,6 +6,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
+import com.ennn.myapplication.network.NetworkManager
 import com.ennn.myapplication.storage.PrefKeys
 import com.ennn.myapplication.storage.SettingsPreferences
 import com.ennn.myapplication.storage.mapSettingsPreferences
@@ -18,7 +19,11 @@ import javax.inject.Singleton
 
 @Singleton
 class Repository @Inject constructor(
-    private val dataStore: DataStore<Preferences>) {
+    private val dataStore: DataStore<Preferences>,
+    private val manager: NetworkManager) {
+
+    suspend fun getUsersListFromServer() = manager.getUsersList()
+    suspend fun loginUserServer(userName: String, pass: String) = manager.loginUser(userName, pass)
 
     suspend fun getSettings(): Flow<SettingsPreferences> {
         val environmentStateFlow: Flow<SettingsPreferences> = dataStore.data
