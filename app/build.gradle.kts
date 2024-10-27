@@ -58,8 +58,13 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.gson)
     ksp(libs.hilt.compiler)
-
+    //retrofit
+    implementation(libs.retrofit)
+    implementation(libs.logging.interceptor)
     //  Storage
     implementation(libs.androidx.datastore.preferences)
 
